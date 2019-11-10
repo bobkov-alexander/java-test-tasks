@@ -28,32 +28,13 @@ public class Application {
         return things;
     }
 
-    public static void findBestThings(Backpack resultBackpack, Backpack backpack, List<Thing> things) {
-        if (things.size() == 0) {
-            if (resultBackpack.currentValue < backpack.currentValue) {
-                resultBackpack.replaceAll(backpack.things);
-            }
-            return;
-        }
-        for (int i = 0; i < things.size(); i++) {
-            if (backpack.isPossibleToAddThing(things.get(i))) {
-                List<Thing> copyThings = new ArrayList<>(things);
-                Thing thing = copyThings.remove(i);
-                backpack.tryAddThing(thing);
-                findBestThings(resultBackpack, backpack, copyThings);
-                backpack.removeThing(thing);
-            } else if (resultBackpack.currentValue < backpack.currentValue) {
-                resultBackpack.replaceAll(backpack.things);
-            }
-        }
-    }
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Backpack backpack = initBackpack(scanner);
         Backpack resultBackpack = new Backpack(backpack.maxWeight);
         List<Thing> things = initThings(scanner);
-        findBestThings(resultBackpack, backpack, things);
-        resultBackpack.printThings();
+        BackpackUtil.findBestThings(resultBackpack, backpack, things);
+        BackpackUtil.printThings(resultBackpack);
     }
 }
