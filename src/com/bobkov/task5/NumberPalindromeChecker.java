@@ -17,7 +17,7 @@ public class NumberPalindromeChecker {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter number N: ");
         int maxNumber = scanner.nextInt();
-        if (maxNumber > 100 || maxNumber <= 0) {
+        if (maxNumber > 100 || maxNumber < 0) {
             System.out.println("Your number is not in range 0..100");
             return;
         }
